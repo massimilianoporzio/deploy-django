@@ -1,5 +1,6 @@
 # Deploy Django - Template Repository
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2efb9eded7d04f6689633e427ad95e37)](https://app.codacy.com/gh/massimilianoporzio/deploy-django?utm_source=github.com&utm_medium=referral&utm_content=massimilianoporzio/deploy-django&utm_campaign=Badge_Grade)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat)](https://pycqa.github.io/isort/)
