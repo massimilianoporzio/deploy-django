@@ -1,7 +1,8 @@
 """Views for the home app."""
 
+from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 
 def hello_world(request):
@@ -21,31 +22,17 @@ def healthz_view(request):
     return HttpResponse("OK")
 
 
-# Test AI Review
+def test_ai_function(user_id: int, posts_data: list[dict]) -> dict:
+    """Build a summary message and list of active post titles for a user.
 
+    Args:
+        user_id: Primary key of the target user.
+        posts_data: Iterable of post dicts with keys 'title' and 'active'.
 
-def test_ai_function(user_id, posts_data):
-    # Funzione con diversi problemi per testare l'AI Review
-
-    from django.contrib.auth.models import User
-
-    # Problema 1: Query N+1 potential
-    user = User.objects.get(id=user_id)  # Dovrebbe essere get_object_or_404
-
-    # Problema 2: Lista invece di comprehension
-    result_posts = []
-    for post in posts_data:
-        if post["active"] == True:  # Dovrebbe essere 'is True'
-            result_posts.append(post["title"])
-
-    # Problema 3: String concatenation invece di f-string
-    message = "User " + user.username + " has " + str(len(result_posts)) + " posts"
-
-    # Problema 4: Doppia negazione
-    if not user.is_active != True:
-        pass
-
-    # Problema 5: Unused import e variable
-    unused_var = "test"
-
+    Returns:
+        A dict with 'message' and 'posts' keys.
+    """
+    user = get_object_or_404(User, id=user_id)
+    result_posts = [post["title"] for post in posts_data if post.get("active")]
+    message = f"User {user.username} has {len(result_posts)} posts"
     return {"message": message, "posts": result_posts}
